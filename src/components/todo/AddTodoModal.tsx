@@ -14,11 +14,14 @@ import { useAppDispatch} from "@/redux/hook";
 import { FormEvent, useState } from "react";
 import { Button } from "../ui/button";
 
+
 export const AddTodoModal = () => {
   const [task, setTask] = useState("");
   const [description, setDescription] = useState("");
   const dispath = useAppDispatch();
   // const formRef = useRef<HTMLFormElement>(null);
+
+ 
 
  
   const handlleSubmit = (e:FormEvent) => {
@@ -27,7 +30,8 @@ export const AddTodoModal = () => {
     const taskDetails = {
         id:randomString ,
         title: task,
-       description: description,
+       description: description
+
      
     };
     
