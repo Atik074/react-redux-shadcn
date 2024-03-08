@@ -1,27 +1,22 @@
- import { useGetTodosQuery } from "@/redux/api/api";
+import { useGetTodosQuery } from "@/redux/api/api";
 import { AddTodoModal } from "./AddTodoModal";
 import TodoCard from "./TodoCard";
 import TodoFilter from "./TodoFilter";
 // import { useAppSelector } from "@/redux/hook";
 
-
-
-
 const TodoContainer = () => {
-  // //From localhost 
+  // //From localhost
   //   const { todos } = useAppSelector((state) => state.todos);
-    
-const {data:todos  , isLoading , isError}  = useGetTodosQuery(undefined)
 
+  const { data: todos, isLoading, isError } = useGetTodosQuery(undefined);
 
-  if(isLoading){
-    return <p>Loading...</p>
-  }
- 
-  if(isError){
-    console.log( 'error is ', isError)
+  if (isLoading) {
+    return <p>Loading...</p>;
   }
 
+  if (isError) {
+    console.log("error is ", isError);
+  }
 
   return (
     <div>
@@ -31,7 +26,7 @@ const {data:todos  , isLoading , isError}  = useGetTodosQuery(undefined)
       </div>
       <div className="bg-primary-gradient w-full h-full  rounded-md p-[5px]">
         <div className="bg-white space-y-5 rounded-lg w-full h-full p-5">
-          {todos?.map((item) =>(
+          {todos?.map((item) => (
             <TodoCard key={item._id} {...item} />
           ))}
         </div>

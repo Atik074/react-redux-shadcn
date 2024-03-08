@@ -4,17 +4,11 @@ import DeleteIcon from "../ui/icons/DeleteIcon";
 import EditIcon from "../ui/icons/EditIcon";
 import { useAppDispatch } from "@/redux/hook";
 
-const TodoCard = ({
-  _id,
-  title,
-  description,
-  priority,
-  status: isCompleted,
-}: TTodo) => {
+const TodoCard = ({ id, title, description, priority, isCompleted }: TTodo) => {
   const dispath = useAppDispatch();
 
   const toggleState = () => {
-    dispath(toggleCompleted(_id));
+    dispath(toggleCompleted(id));
   };
 
   return (
@@ -30,20 +24,20 @@ const TodoCard = ({
         <p className="text-xl flex-[2]">{title}</p>
 
         <div className="flex-1 flex justify-center items-center gap-2">
-
-        <div className={`
+          <div
+            className={`
           size-3  flex justify-center rounded-full mr-2
-          ${priority === 'High' ? 'bg-red-600' : null }
-          ${priority === 'Medium' ? 'bg-yellow-600' : null }
-          ${priority === 'Low' ? 'bg-green-600' : null }
+          ${priority === "high" ? "bg-red-600" : null}
+          ${priority === "medium" ? "bg-yellow-600" : null}
+          ${priority === "low" ? "bg-green-600" : null}
           
-          `}>
-          {" "}
-        </div>
+          `}
+          >
+            {" "}
+          </div>
 
-        <p className="text-xl flex-1">{priority}</p>
+          <p className="text-xl flex-1">{priority}</p>
         </div>
-   
 
         <div className="flex-1">
           {isCompleted ? (
@@ -55,7 +49,7 @@ const TodoCard = ({
         <p className="text-xl flex-[2]">{description}</p>
         <div className="space-x-5">
           <Button
-            onClick={() => dispath(removeTodo(_id))}
+            onClick={() => dispath(removeTodo(id))}
             className="bg-red-800  text-lg"
           >
             <DeleteIcon />
