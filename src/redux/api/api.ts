@@ -9,17 +9,26 @@ export const baseApi = createApi({
    tagTypes:['todo'] ,
   endpoints: (builder) => ({
     getTodos: builder.query({
-      query: () => ({
-        url: '/task',
+      query:(priority) =>{
+        const params = new URLSearchParams()
+
+        if(priority){
+          params.append("priority" , priority)
+        }
+
+         return{
+        url: `/task`,
         method: 'GET',
-      }),
+        params: params
+      }
+    },
       providesTags:['todo']
     }),
     addTodo: builder.mutation({
       query:(data)=>{ 
           console.log("base Api data" ,data)
          return {
-          url:'/task' ,
+          url:'/task',
           method:'POST' ,
           body:data
          

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,23 +6,26 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
 
-const TodoFilter = () => {
-  const [position, setPosition] = useState("medium");
+const TodoFilter = ({priority , setPriority}) => {
+  // const [priority, setPriority] = useState("medium");
+
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-         <Button className="text-xl bg-primary-gradient font-semibold px-5 py-3 rounded-md"  variant="outline">Open</Button> 
+        <Button variant="outline">Open</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="high">High</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="medium">Medium</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="low">Low</DropdownMenuRadioItem>
+
+        <DropdownMenuRadioGroup value={priority} onValueChange={setPriority}>
+          <DropdownMenuRadioItem value="High">Top</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="Medium">Bottom</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="Low">Right</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
