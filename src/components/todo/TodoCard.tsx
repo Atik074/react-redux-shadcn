@@ -1,14 +1,52 @@
-import { TTodo, removeTodo, toggleCompleted } from "@/redux/features/todoSlice";
 import { Button } from "../ui/button";
 import DeleteIcon from "../ui/icons/DeleteIcon";
 import EditIcon from "../ui/icons/EditIcon";
-import { useAppDispatch } from "@/redux/hook";
+import { useUpdateTodoMutation } from "@/redux/api/api";
 
-const TodoCard = ({ id, title, description, priority, isCompleted }: TTodo) => {
-  const dispath = useAppDispatch();
+
+export type TTodoCardProps= {
+  _id: string;
+  title: string;
+  description: string;
+  isCompleted?: boolean;
+  priority: string;
+};
+
+
+
+
+const TodoCard = ({ _id ,title, description, priority, isCompleted }:TTodoCardProps) => {
+
+  const [updateTodo , {isLoading}] = useUpdateTodoMutation()
+
+
+  if(isLoading){
+    <p>Loading...</p>
+  }
+
 
   const toggleState = () => {
-    dispath(toggleCompleted(id));
+      // const taskData ={
+      //   title, 
+      //   description,
+      //    priority, 
+      //   isCompleted:!isCompleted 
+      
+      // }
+
+      const options ={
+        id:_id ,
+        data:{
+          title, 
+          description,
+           priority, 
+          isCompleted:!isCompleted 
+        }
+        
+      }
+
+      updateTodo(options)
+
   };
 
   return (
@@ -16,10 +54,9 @@ const TodoCard = ({ id, title, description, priority, isCompleted }: TTodo) => {
       <div className="bg-white flex justify-between items-center p-3  rounded-md border ">
         <input
           className="mr-3"
-          onChange={toggleState}
+          onChange={toggleState }
           type="checkbox"
-          name=""
-          id=""
+         defaultChecked={isCompleted}
         />
         <p className="text-xl flex-[2]">{title}</p>
 
@@ -49,7 +86,6 @@ const TodoCard = ({ id, title, description, priority, isCompleted }: TTodo) => {
         <p className="text-xl flex-[2]">{description}</p>
         <div className="space-x-5">
           <Button
-            onClick={() => dispath(removeTodo(id))}
             className="bg-red-800  text-lg"
           >
             <DeleteIcon />
