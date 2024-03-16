@@ -1,7 +1,7 @@
 import { useGetTodosQuery } from "@/redux/api/api";
 import { AddTodoModal } from "./AddTodoModal";
 import TodoCard from "./TodoCard";
-import TodoFilter from "./TodoFilter";// import { useAppSelector } from "@/redux/hook";
+import TodoFilter from "./TodoFilter";
 import { useState } from "react";
 
 const TodoContainer = () => {
